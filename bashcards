@@ -1,0 +1,33 @@
+#!/bin/bash
+
+
+INPUT=$1
+
+
+
+while read -r line; do
+	# Read front and back of each card
+	FRONT="$(cut -d',' -f1 <(echo $line))"
+	BACK="$(cut -d',' -f2 <(echo $line))"
+
+	# Prompt user with front of card
+	printf "$FRONT\n"
+
+	# Accept user's answer
+	read -r ANSWER < /dev/tty
+
+	# Compare cards
+	if [[ $ANSWER == $BACK ]]; then
+		printf "✔︎ Correct! ☺︎\n\n"
+	else
+		printf "✘ Incorrect ☹︎\n"
+		printf "$BACK\n\n"
+	fi
+
+
+done < $INPUT
+
+
+
+
+
