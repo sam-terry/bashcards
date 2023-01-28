@@ -58,6 +58,14 @@ CARDCOUNT=$(grep -vc '^$' $1) # Total number of cards in deck (nonempty lines)
 declare -i SEEN # Number of cards seen so far
 declare -i CORRECT # Number of cards correctly identified
 
+
+# Deck is read as virtual file, processed with random sorting if shuffle is on
+if [[ $SHUFFLE == 'TRUE' ]]; then
+	ORDER_IN='sort -R'
+else
+	ORDER_IN='cat'
+fi
+
 while read -r line; do
 
 	if [[ -n $line ]]; then
@@ -85,8 +93,8 @@ while read -r line; do
 	fi
 
 
-done < $1
 
+done < <($ORDER_IN $1)
 
 
 
