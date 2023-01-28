@@ -2,7 +2,14 @@
 
 # Simple command-line utility for studying flashcards
 
-usage() { echo "Usage: bashcards [-h|-H] DECKFILE"; }
+usage() { echo "Usage: bashcards [-h|-H] DECKFILE"; } # Function called when -h flag is passed
+
+
+# COLORS
+RED='\033[0;31m'
+GREEN='\033[0;32m'
+NC='\033[0m' # No Color
+
 
 REVERSE='FALSE' # Variable determines side display order
 
@@ -66,10 +73,10 @@ while read -r line; do
 		# Compare cards
 		if [[ $ANSWER == $BACK ]]; then
 			CORRECT+=1
-			printf "✔︎ Correct! ☺︎ Score: $CORRECT/$SEEN\n\n"
+			printf "${GREEN}✔︎ Correct!${NC} ☺︎ Score: $CORRECT/$SEEN\n\n"
 		else
 			printf "$BACK\n"
-			printf "✘ Incorrect ☹︎ Score: $CORRECT/$SEEN\n\n"
+			printf "${RED}✘ Incorrect${NC} ☹︎ Score: $CORRECT/$SEEN\n\n"
 		fi
 	fi
 
