@@ -1,5 +1,17 @@
 #!/bin/bash
 
+# Simple command-line utility for studying flashcards
+
+usage() { echo "Usage: bashcards [-h|-H] DECKFILE"; }
+
+while getopts "hH" options; do
+	case ${options} in
+		h|H)
+			usage
+			exit
+			;;
+	esac
+done
 
 INPUT=$1
 
