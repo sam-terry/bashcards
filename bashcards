@@ -23,14 +23,16 @@ done
 
 
 INPUT=$1 # Input csv deck file from which cards are read
-
+CARDCOUNT=$(grep -vc '^$' $INPUT) # Total number of cards in deck (nonempty lines)
 
 # Display utility title
 printf "* BASHCARDS *\n"
 printf "_____________\n\n"
+sleep 1.5
 
 # Display name of deck
 printf "Studying deck \"$(basename -s .csv "$INPUT")\"\n\n\n"
+sleep 1
 
 
 # If reverse mode is on, use the second field as the front of card
