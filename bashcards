@@ -25,6 +25,14 @@ done
 INPUT=$1 # Input csv deck file from which cards are read
 
 
+# Display utility title
+printf "* BASHCARDS *\n"
+printf "_____________\n\n"
+
+# Display name of deck
+printf "Studying deck \"$(basename -s .csv "$INPUT")\"\n\n\n"
+
+
 # If reverse mode is on, use the second field as the front of card
 if [[ $REVERSE == 'TRUE' ]]; then
 	FRONTFIELD="2"
