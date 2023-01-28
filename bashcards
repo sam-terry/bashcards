@@ -35,12 +35,11 @@ done
 
 
 
-INPUT=$1 # Input csv deck file from which cards are read
 
 display_title
 
 # Display name of deck
-printf "Studying deck \"$(basename -s .csv "$INPUT")\"\n\n\n"
+printf "Studying deck \"$(basename -s .csv "$1")\"\n\n\n"
 sleep 1
 
 
@@ -53,7 +52,7 @@ else
 	BACKFIELD="2"
 fi	
 
-CARDCOUNT=$(grep -vc '^$' $INPUT) # Total number of cards in deck (nonempty lines)
+CARDCOUNT=$(grep -vc '^$' $1) # Total number of cards in deck (nonempty lines)
 declare -i SEEN # Number of cards seen so far
 declare -i CORRECT # Number of cards correctly identified
 
@@ -84,7 +83,7 @@ while read -r line; do
 	fi
 
 
-done < $INPUT
+done < $1
 
 
 
