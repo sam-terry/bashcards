@@ -4,23 +4,41 @@
 
 usage() { echo "Usage: bashcards [-h|-H] DECKFILE"; }
 
-while getopts "hH" options; do
+REVERSE='FALSE' # Variable determines side display order
+
+while getopts "hHrR" options; do
 	case ${options} in
 		h|H)
 			usage
 			exit
 			;;
+		r|R)
+			REVERSE='TRUE'
+			shift "$((OPTIND-1))"
+			;;
 	esac
 done
 
-INPUT=$1
 
+
+
+INPUT=$1 # Input csv deck file from which cards are read
+
+
+# If reverse mode is on, use the second field as the front of card
+if [[ $REVERSE == 'TRUE' ]]; then
+	FRONTFIELD="2"
+	BACKFIELD="1"
+else
+	FRONTFIELD="1"
+	BACKFIELD="2"
+fi	
 
 
 while read -r line; do
 	# Read front and back of each card
-	FRONT="$(cut -d',' -f1 <(echo $line))"
-	BACK="$(cut -d',' -f2 <(echo $line))"
+	FRONT="$(cut -d',' -f$FRONTFIELD <(echo $line))"
+	BACK="$(cut -d',' -f$BACKFIELD <(echo $line))"
 
 	# Prompt user with front of card
 	printf "$FRONT\n"
