@@ -18,8 +18,8 @@ NC='\033[0m' # No Color
 
 
 REVERSE='FALSE' # Variable determines side display order
-
-while getopts "hHrR" options; do
+SHUFFLE='FALSE' # Variable determines card display order (sequential/random)
+while getopts "hHrRsS" options; do
 	case ${options} in
 		h|H)
 			usage
@@ -27,11 +27,13 @@ while getopts "hHrR" options; do
 			;;
 		r|R)
 			REVERSE='TRUE'
-			shift "$((OPTIND-1))"
+			;;
+		s|S)
+			SHUFFLE='TRUE'
 			;;
 	esac
 done
-
+shift "$((OPTIND-1))"
 
 
 
