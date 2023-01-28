@@ -4,7 +4,7 @@
 
 usage() { echo "Usage: bashcards [-h|-H] DECKFILE"; } # Function called when -h flag is passed
 
-display_title() {
+display_title() { # Function for displaying utility title
 	printf "##########################################\n"
 	printf "#############   BASHCARDS   ##############\n"
 	printf "##########################################\n\n"
