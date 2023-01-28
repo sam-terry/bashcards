@@ -1,0 +1,20 @@
+##########################################
+#############   BASHCARDS   ##############
+##########################################
+
+
+A command-line utility for studying flash cards, written in Bash
+
+
+
+
+
+
+Card decks are stored as two-column csv files; each record represents a card, and each field represents a side of that card.
+
+
+
+TO DO:
+- Add shuffle function with option -s
+	- "sort -R" will randomly sort the lines in a file
+	- Probably best implemented by conditional assignment of the $INPUT variable directed into the while loop used to read the csv file
