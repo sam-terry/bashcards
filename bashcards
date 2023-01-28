@@ -23,7 +23,6 @@ done
 
 
 INPUT=$1 # Input csv deck file from which cards are read
-CARDCOUNT=$(grep -vc '^$' $INPUT) # Total number of cards in deck (nonempty lines)
 
 # Display utility title
 printf "* BASHCARDS *\n"
@@ -44,6 +43,9 @@ else
 	BACKFIELD="2"
 fi	
 
+CARDCOUNT=$(grep -vc '^$' $INPUT) # Total number of cards in deck (nonempty lines)
+declare -i SEEN # Number of cards seen so far
+declare -i CORRECT # Number of cards correctly identified
 
 while read -r line; do
 
@@ -52,8 +54,10 @@ while read -r line; do
 		FRONT="$(cut -d',' -f$FRONTFIELD <(echo $line))"
 		BACK="$(cut -d',' -f$BACKFIELD <(echo $line))"
 		
+		
 
 		# Prompt user with front of card
+		SEEN+=1
 		printf "$FRONT\n"
 
 		# Accept user's answer
@@ -61,10 +65,11 @@ while read -r line; do
 
 		# Compare cards
 		if [[ $ANSWER == $BACK ]]; then
-			printf "✔︎ Correct! ☺︎\n\n"
+			CORRECT+=1
+			printf "✔︎ Correct! ☺︎ Score: $CORRECT/$SEEN\n\n"
 		else
-			printf "✘ Incorrect ☹︎\n"
-			printf "$BACK\n\n"
+			printf "$BACK\n"
+			printf "✘ Incorrect ☹︎ Score: $CORRECT/$SEEN\n\n"
 		fi
 	fi
 
